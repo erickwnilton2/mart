@@ -1,10 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
-import "./globals.css";
+import "../styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Mart",
   description: "Menu of a non-existent restaurant.",
+  keywords: ["Mart", "Menu", "Restaurant", "Software", "webapp"],
+  icons: { icon: ["/food.png"] },
 };
 
 export default function RootLayout({
