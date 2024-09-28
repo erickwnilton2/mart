@@ -1,6 +1,7 @@
 import React from "react";
 import { FoodData } from "@/interface/foodData";
 import { CardComponent } from "@/components/card";
+import { Grid } from "@/components/grid";
 
 export default function Home() {
   const ConsumeProductData: FoodData[] = [];
@@ -18,15 +19,17 @@ export default function Home() {
           </button>
         </div>
       </header>
-      <main className="m-3 p-3 lg:m-10 lg:p-10 gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {ConsumeProductData.map((foodData) => (
-          <CardComponent
-            key={foodData.id}
-            title={foodData.title}
-            price={foodData.price}
-            image={foodData.image}
-          />
-        ))}
+      <main>
+        <Grid>
+          {ConsumeProductData.map((foodData) => (
+            <CardComponent
+              key={foodData.id}
+              title={foodData.title}
+              price={foodData.price}
+              image={foodData.image}
+            />
+          ))}
+        </Grid>
       </main>
     </div>
   );
