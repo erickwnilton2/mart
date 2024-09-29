@@ -1,10 +1,36 @@
+"use client";
+
 import React from "react";
-import { FoodData } from "@/interface/foodData";
-import { CardComponent } from "@/components/card";
+import { useState } from "react";
+import { useEffect } from "react";
+
+import { api } from "@/services/api";
+
 import { Grid } from "@/components/grid";
+import { Loading } from "@/components/loading";
+import { CardComponent } from "@/components/card";
+
+import { FoodData } from "@/interface/foodData";
+
 
 export default function Home() {
-  const ConsumeProductData: FoodData[] = [];
+  const [data, setData] = useState<FoodData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRestaurantData = async () => {
+      try {
+        const response = await api.get("/foods");
+        setData(response.data);
+      } catch {
+        return null;
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchRestaurantData();
+  }, []);
 
   return (
     <div>
@@ -20,16 +46,19 @@ export default function Home() {
         </div>
       </header>
       <main>
-        <Grid>
-          {ConsumeProductData.map((foodData) => (
-            <CardComponent
-              key={foodData.id}
-              title={foodData.title}
-              price={foodData.price}
-              image={foodData.image}
-            />
-          ))}
-        </Grid>
+        {isLoading && <Loading />}
+        {data.length > 0 && (
+          <Grid>
+            {data.map((foodData) => (
+              <CardComponent
+                key={foodData.id}
+                title={foodData.title}
+                price={foodData.price}
+                image={foodData.image}
+              />
+            ))}
+          </Grid>
+        )}
       </main>
     </div>
   );
