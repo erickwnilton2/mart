@@ -23,7 +23,9 @@ export function CardComponent({
             alt="image"
           />
           <h1 className="text-1xl mt-3 font-medium">{title}</h1>
-          <p>{description}</p>
+          <p className="m-2 text-1xl font-normal text-gray-500 leading-5">
+            {description}
+          </p>
           <strong className="text-1xl text-[#000] font-normal">
             Valor: R${price}
           </strong>
