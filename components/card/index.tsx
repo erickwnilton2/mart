@@ -2,11 +2,17 @@ import React from "react";
 
 interface CardComponentProps {
   title: string;
+  description: string;
   image: string;
   price: number;
 }
 
-export function CardComponent({ title, image, price }: CardComponentProps) {
+export function CardComponent({
+  title,
+  description,
+  image,
+  price,
+}: CardComponentProps) {
   return (
     <div>
       <div className="bg-[#f3f0f0] rounded-2xl lg:flex lg:flex-col">
@@ -17,6 +23,7 @@ export function CardComponent({ title, image, price }: CardComponentProps) {
             alt="image"
           />
           <h1 className="text-1xl mt-3 font-medium">{title}</h1>
+          <p>{description}</p>
           <strong className="text-1xl text-[#000] font-normal">
             Valor: R${price}
           </strong>

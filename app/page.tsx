@@ -12,7 +12,6 @@ import { CardComponent } from "@/components/card";
 
 import { FoodData } from "@/interface/foodData";
 
-
 export default function Home() {
   const [data, setData] = useState<FoodData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,6 +52,7 @@ export default function Home() {
               <CardComponent
                 key={foodData.id}
                 title={foodData.title}
+                description={foodData.description}
                 price={foodData.price}
                 image={foodData.image}
               />
