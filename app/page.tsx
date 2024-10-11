@@ -10,11 +10,19 @@ import { Grid } from "@/components/grid";
 import { Loading } from "@/components/loading";
 import { CardComponent } from "@/components/card";
 
+import { Modal } from "@/components/modal";
+import { OpenModalButton } from "@/components/buttons/openModal";
+import { ProductForm } from "@/components/productForm/productForm";
+
 import { FoodData } from "@/interface/foodData";
 
 export default function Home() {
   const [data, setData] = useState<FoodData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const handleOpenModal = () => setIsOpenModal(true);
+  const handleCloseModal = () => setIsOpenModal(false);
 
   useEffect(() => {
     const fetchRestaurantData = async () => {
@@ -39,9 +47,10 @@ export default function Home() {
           <strong className="hidden sm:block font-thin text-1xl border-b-2 text-[#fffffff6] border-b-[#969696]">
             Cardápio de um restaurante fictício
           </strong>
-          <button className="p-2 bg-[#e2e8f0] text-[#000] rounded-lg hover:bg-[#ffffffbd]">
-            Adicionar produto
-          </button>
+          <OpenModalButton
+            title="adicionar produto"
+            openModal={handleOpenModal}
+          />
         </div>
       </header>
       <main>
@@ -60,6 +69,10 @@ export default function Home() {
           </Grid>
         )}
       </main>
+
+      <Modal isOpen={isOpenModal} onClose={handleCloseModal}>
+        <ProductForm />
+      </Modal>
     </div>
   );
 }
